@@ -1,0 +1,69 @@
+{% extends "admin_index.html" %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'loginstyle.css' %}"/>
+<body>
+
+     <h4 class="text-primary " style=" color: blue;padding-top:30px;text-align:center;"> Books </h4>
+ <link rel="stylesheet" href="{% static 'loginstyle.css' %}"/>
+<!-- <div class="card" style="margin-right:40px;" id="bookcard">-->
+     <nav class="navbar navbar-expand bg-light">
+<!--     <h4 class="text-primary " style=" color: blue;padding-top:30px"> Books </h4>-->
+
+     <form class="d-none d-md-flex ms-4" align="center" style="padding-bottom:60px;width:450px;">
+                    <label></label>
+                    <input class="form-control border-0" list="datalistOptions" type="search" placeholder= "Search...">
+                  <datalist id="datalistOptions">
+                      <option value="Fiction">
+                      <option value="Non-fiction">
+                       <option value="Business">
+                    <option value="Kids Story">
+                     <option value="Biographies">
+                </datalist>
+     </form>
+     </nav>
+     <br>
+<form id="customerform" style="padding-left:30px">
+<table class=table border-style: solid;color:antiquewhite; style="text-decoration-color: antiquewhite;">
+    <thead color:antiquewhite;>
+    <tr>
+        <th>S. No</th>
+        <th>Book</th>
+        <th>Author</th>
+        <th>Category</th>
+          <th>Language</th>
+          <th>No Of Pages</th>
+          <th>Publisher</th>
+          <th>Price</th>
+<!--          <th>Category</th>-->
+
+    </tr>
+    </thead>
+    {% for i in data %}
+    <tbody>
+    <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{ i.book }}</td>
+        <td>{{i.author1}}</td>
+        <td>{{i.category}}</td>
+        <td>{{ i.language }}</td>
+        <td>{{ i.pages }}</td>
+        <td>{{ i.publisher }}</td>
+        <td>{{ i.price}}</td>
+        <td>
+             <form method="post">   <button><a href="{% url 'updatebooks' i.id %}">Update</a></button></form>
+
+        </td>
+        <td>
+             <form method="post">   <button><a href="{% url 'deletebooks' i.id %}">Delete</a></button></form>
+        </td>
+
+    </tr>
+    </tbody>
+    {% endfor %}
+</table>
+
+</form>
+ </div>
+</body>
+    {% endblock %}

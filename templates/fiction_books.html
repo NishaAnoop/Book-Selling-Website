@@ -1,0 +1,45 @@
+{% extends "themes1.html" %}
+{% block content %}
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'loginstyle.css' %}">
+<link rel="stylesheet" href="{% static 'customerstyle.css' %}">
+<link rel="stylesheet" href="{% static 'bookstyle.css' %}">
+<style>
+
+   .card-data
+    {
+    display:flex;
+    gap:10px;
+    grid-template-columns: repeat(auto-fill, minmax(200px,1fr)
+    flex-wrap: wrap;
+    }
+
+</style>
+
+
+
+<body>
+<div class="conatiner" style="margin-top:40px;margin-left:70px; ">
+   <center> <h3> Fiction Books</h3></center>
+
+<ul class="card-data">
+ {% for i in data %}
+       <div class="card" style="width: 10rem;padding-top:20px;display:inline-block flex" >
+           <center><a href="{% url 'shopping' i.id %}" ><img src="{{ i.image.url }}" class="card-img-top" alt="..." style="width:5rem"></a></center>
+                 <div class="card-body">
+                  <h5 class="card-title">{{ i.book }}</h5>
+                  <p class="card-text">{{ i.author1 }}</p>
+                    <p class="card-text">{{ i.price }}</p>
+                            </div>
+       </div>
+      {% endfor %}
+
+    <br>
+
+</ul>
+</div>
+
+</body>
+
+{% endblock %}

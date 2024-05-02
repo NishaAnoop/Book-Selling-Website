@@ -1,0 +1,40 @@
+
+{% extends "admin_index.html" %}
+{% block content %}
+{% load static %}
+ <link rel="stylesheet" href="{% static 'loginstyle.css' %}"/>
+<body>
+ <link rel="stylesheet" href="{% static 'loginstyle.css' %}"/>
+
+<h4 class="text-primary " style=" color: blue;align:"center"> Customer Data</h4>
+<form id="customerform">
+<table class=table border-style: solid;color:antiquewhite; style="text-decoration-color: antiquewhite;">
+    <thead color:antiquewhite;>
+    <tr>
+        <th>S. No</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Mobile Number</th>
+
+    </tr>
+    </thead>
+    {% for i in data %}
+    <tbody>
+    <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{ i.name }}</td>
+        <td>{{i.email}}</td>
+        <td>{{i.mobile}}</td>
+
+        <td>
+            <form method="post">   <button><a href="{% url 'deletecustomer' i.user_id %}">Delete</a></button></form>
+        </td>
+
+    </tr>
+    </tbody>
+    {% endfor %}
+</table>
+
+</form>
+</body>
+    {% endblock %}

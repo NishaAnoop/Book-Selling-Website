@@ -1,0 +1,22 @@
+{% extends "admin_index.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% load static %}
+<body>
+
+<link rel="stylesheet" href="{% static 'loginstyle.css' %}"/>
+<div class="card">
+    <div class="card-body">
+  <form method="post" enctype="multipart/form-data">
+         {% csrf_token %}
+        <div>
+        {{form1|crispy}}
+        </div>
+      <button type="submit" class="btn btn-success">Submit</button>
+          </form>
+    </div>
+</div>
+
+
+{% endblock %}
+</body>

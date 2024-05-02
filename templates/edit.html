@@ -1,0 +1,110 @@
+{% extends "admin_index.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% load static %}
+ <link rel="stylesheet" href="{% static 'loginstyle.css' %}"/>
+<body>
+ <link rel="stylesheet" href="{% static 'loginstyle.css' %}"/>
+<div class="card">
+    <div class="card-body">
+  <form method="post" enctype="multipart/form-data">
+         {% csrf_token %}
+        <div>
+        {{form|crispy}}
+        </div>
+      <button type="submit" class="btn btn-success">Submit</button>
+          </form>
+    </div>
+</div>
+
+<!--              <fieldset>-->
+<!--                    <div class="container-fluid">-->
+<!--                        &lt;!&ndash;form Start here&ndash;&gt;-->
+<!--                                 <div class="form-group row"><br>-->
+<!--                                    <label class="col-sm-1 col-form-label"></label>  <br>-->
+<!--                                        <div class="col-sm-4">-->
+<!--                                            <h3>Enter Details</h3>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                <div class="form-group row">-->
+<!--                                    <label class="col-sm-2 col-form-label"> Book:</label>  <br>-->
+<!--                                        <div class="col-sm-4" >-->
+<!--                                            {{ form3.book }}-->
+<!--                                        </div>-->
+<!--                                </div>-->
+<!--                                <div class="form-group row">-->
+<!--                                    <label class="col-sm-2 col-form-label">Author:</label>  <br>-->
+<!--                                     <div class="col-sm-4">-->
+<!--                                        {{ form3.author1 }}-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="form-group row">-->
+<!--                                    <label class="col-sm-2 col-form-label">Category:</label>-->
+<!--                                    <div class="col-sm-4">-->
+<!--                                        {{ form3.category }}-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="form-group row">-->
+<!--                                <label class="col-sm-2 col-form-label">Publisher:</label>-->
+<!--                                    <div class="col-sm-4">-->
+<!--                                        {{ form3.publisher }}-->
+<!--                                    </div>-->
+<!--&lt;!&ndash;                                    <br>&ndash;&gt;-->
+<!--                                </div>-->
+<!--                                <div class="form-group row">-->
+<!--                                <label class="col-sm-2 col-form-label">Release:</label>  <br>-->
+<!--                                <div class="col-sm-4" >-->
+<!--                                         {{ form3.release }}-->
+<!--                                </div>-->
+<!--                                </div>-->
+<!--                                <div class="form-group row">-->
+<!--                                    <label class="col-sm-2 col-form-label">Language:</label>  <br>-->
+<!--                                        <div class="col-sm-4" >-->
+<!--                                            {{ form3.language }}-->
+<!--                                        </div>-->
+<!--                                </div>-->
+<!--                                <div class="form-group row">-->
+<!--                                <label class="col-sm-2 col-form-label">No Of Pages:</label>  <br>-->
+<!--                                    <div class="col-sm-4" >-->
+<!--                                          {{ form3.pages }}-->
+<!--                                      </div>-->
+<!--                                </div>-->
+<!--                                <div class="form-group row">-->
+<!--                                      <label class="col-sm-2 col-form-label">Edition:</label>  <br>-->
+<!--                                    <div class="col-sm-4" >-->
+<!--                                        {{ form3.edition }}-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="form-group row">-->
+<!--                                <label class="col-sm-2 col-form-label">Price:</label>  <br>-->
+<!--                                     <div class="col-sm-4" >-->
+<!--                                        {{ form3.price }}-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                        <div class="form-group row">-->
+<!--                                    <label class="col-sm-2 col-form-label">ISBN:</label>-->
+<!--                                    <div class="col-sm-4">-->
+<!--                                        {{ form3.isbn }}-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                        <div class="form-group row">-->
+<!--                                <label class="col-sm-2 col-form-label">Image:</label>  <br>-->
+<!--                                     <div class="col-sm-4" >-->
+<!--                                        {{ form3.image }}-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <br>-->
+<!--                                <br>-->
+<!--                                 <div class="form-group row">-->
+<!--                                        <label class="col-sm-1 col-form-label"></label>-->
+<!--                                         <div class="col-sm-4">-->
+<!--                                                <button type="submit" class="btn btn-success"  style="margin-bottom: 70px;">ADD</button>-->
+<!--                                        </div>-->
+<!--                                </div>-->
+<!--                        &lt;!&ndash;form end&ndash;&gt;-->
+<!--                    </div>-->
+<!--              </fieldset>-->
+  </form>
+
+{% endblock %}
+</body>

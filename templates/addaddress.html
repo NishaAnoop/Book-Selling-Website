@@ -1,0 +1,35 @@
+{% extends "themes1.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{%  block content  %}
+
+<link rel="stylesheet" href="{% static 'loginstyle.css' %}" xmlns="http://www.w3.org/1999/html">
+<link rel="stylesheet" href="{% static 'customerstyle.css' %}">
+
+<div class="container">
+     <center> <p>My Address</center>
+    <div class="card"  id="addaddresscard" style="margin-top:70px;margin-bottom:120px;height:100%;width:550px;margin-left:240px;">
+
+        <div class="card-body">
+            <form method="post" id="addressform" style="">
+                    {% csrf_token %}
+                    {{form1|crispy}}
+
+
+                  <button type="submit" class="btn btn-success"  style="align:center">Update</button>
+
+
+                             <button type="submit" class="btn btn-success" style="margin-right:16px">  Cancel   </button>
+
+
+
+            </form>
+        </div>
+    </div>
+
+
+
+
+</div>
+
+{% endblock %}

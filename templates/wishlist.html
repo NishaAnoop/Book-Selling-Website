@@ -1,0 +1,142 @@
+
+{% extends "themes1.html" %}
+{% block content %}
+{% load static %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+ <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="{% static 'loginstyle.css' %}">
+<link rel="stylesheet" href="{% static 'customerstyle.css' %}">
+<link rel="stylesheet" href="{% static 'bookstyle.css' %}">
+
+<script language="javascript" type="text/javascript">
+
+    </script>
+<style>
+#buy-card{
+<!--    border-style: ridge;-->
+    border-width: 0.5px 0.5px 0.5px 0.5px;
+    border-radius: 0.15rem;
+
+    outline-style: outset;
+  outline-color: grey;
+   outline-color: light rgb(133, 160, 168);
+}
+.address-card{
+padding-bottom:40px;
+}
+    .proceed-to-buy{
+
+    margin-left:130px;
+    padding-bottom:40px;
+    outline-style: outset;
+
+    }
+
+</style>
+
+</script>
+<body>
+<div class="container mt-4" >
+    <div class="text-center" style="margin-top:40px;"><span>Your Order</span></div>
+    <div class="conatiner-card" id="buy-card" style="width: 100%; height:;margin-bottom:50px;w3-border">
+
+        <div class="container-fluid">
+                       <ol  class="list-unstyled" style="padding-top:20px;w3-border">
+                    {% for i in wish_list %}
+
+                              <li class="list-inline-item" style="padding-top:20px;">
+                                    <div class="card-image" style="width:200px;">
+                                    <span> <img src="{{ i.wished_book.image.url }}" class="card-img-top" alt="..." style="width:120px;padding-bottom:20px;"></span>
+                                    </div>
+                                <div class="card-body">
+                                  <li class="list-inline-item">
+                                            <p style="padding-top:40px;"><span> {{ i.wished_book.book }}</span></p>
+                                                    <p>{{ i.wished_book.author }}</p>
+                                            <p><span>Price: <span>&#8377;</span><span><p id="bk_price">{{ i.wished_book.price }}</p></span></p>
+
+                                              <span class="a-dropdown-container">
+                                      <label class="a-native-dropdown" for="quantity">Quantity</label>
+                                 </span>
+                                  <select class="a-native-dropdown a-declarative" id="select1" name="Quantity" autocomplete="off" tabindex="0"
+                                       data-action="a-dropdown-select">
+                                        <option value="1" selected="">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                       <option value="5">5</option>
+                                         <option value="6">6</option>
+                                         <option value="7">7</option>
+                                     </select>
+                            </li>
+                                <br>
+
+                                  <div class="col-md-4">
+
+
+                                                <a href="{% url 'add_to_cart' %}" class="btn btn-success" id="btn1" value="{{ i.wished_book.id }}">Add To Cart</a>
+                                                <a href="{% url 'remove_from_wishlist' i.id %}" class="btn btn-warning">Remove</a>
+                                 </div>
+
+                                    <div class="col-md-2">
+
+                                    </div>
+                                    <P>____________________________________________________________</P>
+                     {% endfor %}
+
+
+               </ol>
+                     <br>
+                     <br>
+        </div>
+<!--        <div class="proceed-to-buy" style="height:20%;width:800px;">-->
+<!--                                <p class="subtotal">Subtotal: &#8377;{{ total_amount }}</p>-->
+<!--                               <form action="{% url 'add_to_order' %}" method="post">-->
+<!--                                  {% csrf_token %}-->
+<!--                                 <button type="submit" class="btn btn-success">Proceed to Buy</button>-->
+<!--                              </form>-->
+
+    </div>
+    <br>
+    </div>
+
+
+    </div>
+
+<script language="javascript" type="text/javascript">
+     $(document).ready(function(){
+            $("#btn1").click(function(e){
+                e.preventDefault();
+                var qty1=$("#select1 option:selected").val()
+                e.preventDefault()
+                var book_id=$("#btn1").val()
+                var book_price=$("#bk_price").text()
+                let this_val=$(this)
+                console.log("id=",book_id)
+                console.log("ajax qty=",qty1)
+                console.log("price=",book_price)
+                $.ajax({
+                    type: 'POST',
+                    url: "{% url 'add_to_cart' %}",
+                    data: {
+                           'book_id':book_id,
+                            'qty1':qty1,
+                            'book_price':book_price,
+                             csrfmiddlewaretoken: '{{ csrf_token }}',
+                              action:'POST'
+                    },
+                    dataType:'json',
+                    success: function(json){
+                        document.getElementById("select1");
+                        console.log(json)
+                    },
+                    // error: function(xhr,errmsg,err){}
+
+                });
+            });
+
+
+        });
+
+    </script>
+{% endblock %}
+</body>

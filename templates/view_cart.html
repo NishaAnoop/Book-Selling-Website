@@ -1,0 +1,10 @@
+{% extends "themes1.html" %}
+{% block content %}
+{% load static %}
+{% for i in data %}
+{{i.book}}
+{{i.qty}}
+{% endfor %}
+{% endblock %}
+
+    

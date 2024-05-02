@@ -1,0 +1,17 @@
+{% extends "themes1.html" %}
+{% block content %}
+<h1>Your Order</h1>
+{% if order_items %}
+    <ul>
+    {% for item in order_items %}
+        <li>{{ item.book.book }} - Quantity: {{ item.quantity }} - Total: {{ item.total }}</li>
+    {% endfor %}
+    </ul>
+    <form action="{% url 'complete_order' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Complete Order</button>
+    </form>
+{% else %}
+    <p>Your order is empty.</p>
+{% endif %}
+{% endblock %}

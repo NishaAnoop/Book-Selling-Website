@@ -1,0 +1,62 @@
+{% extends "admin_index.html" %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'loginstyle.css' %}"/>
+
+<body>
+<link rel="stylesheet" href="{% static 'loginstyle.css' %}"/>
+     <h4 class="text-primary " style=" color: blue;padding-top:30px;text-align:center;"> Orders </h4>
+        <ul class="list-unstyled">
+            <li><h4>Total Orders: {{ count }}</h4></li>
+
+        </ul>
+
+<table class=table border-style: solid;color:antiquewhite; style="text-decoration-color: antiquewhite;">
+    <thead color:blue;>
+    <tr>
+        <th>S. No</th>
+        <th>Customer</th>
+        <th>Book</th>
+        <th>Quantity</th>
+          <th>Price</th>
+          <th>Total Price</th>
+          <th>Date</th>
+
+<!--          <th>Category</th>-->
+
+    </tr>
+    </thead>
+    {% for i in order %}
+    <tbody>
+    <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{ i.user.cus }}</td>
+        <td>{{ i.book.book }}</td>
+        <td>{{i.quantity }}</td>
+        <td>{{ i.price }}</td>
+        <td>{{ i.total }}</td>
+        <td>{{ i.added_date }}</td>
+
+        <td>
+             <form method="post">   <button><a href="#">Update</a></button></form>
+
+        </td>
+        <td>
+             <form method="post">   <button><a href="#">Delete</a></button></form>
+        </td>
+
+    </tr>
+    </tbody>
+    {% endfor %}
+</table>
+<style>
+
+    .th{color:blue;
+    }
+    .td{
+    color:blue;
+    }
+
+</style>
+</body>
+{% endblock %}

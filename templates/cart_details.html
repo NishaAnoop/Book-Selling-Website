@@ -1,0 +1,31 @@
+<!-- cart_details.html -->
+
+{% extends "themes1.html" %}
+{% block content %}
+<div class="container">
+  <h1>Cart Details</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Book</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in cart_items %}
+      <tr>
+        <td>{{ item.book.book }}</td>
+        <td>{{ item.qty }}</td>
+        <td>{{ item.book.price }}</td>
+        <td>
+          <a href="{% url 'remove_from_cart' item.id %}" class="btn btn-danger">Remove</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <p>Total Price: {{ total_price }}</p>
+</div>
+{% endblock %}

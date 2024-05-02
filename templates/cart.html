@@ -1,0 +1,9 @@
+{% extends "themes1.html" %}
+{% block content %}
+{% load static %}
+
+{% for cart_item in cart_items %}
+    {{ cart_item.book.title }} - Quantity: {{ cart_item.quantity }}
+{% endfor %}
+
+{% endblock %}

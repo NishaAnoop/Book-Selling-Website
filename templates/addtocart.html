@@ -1,0 +1,23 @@
+{% extends "themes1.html" %}
+{% block content %}
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'loginstyle.css' %}">
+<link rel="stylesheet" href="{% static 'customerstyle.css' %}">
+<link rel="stylesheet" href="{% static 'bookstyle.css' %}">
+
+<div class="container" id="firstcartdiv">
+
+
+    <form id="cartform" method="post">
+         {% csrf_token %}
+       <div class="d-flex p-2 bd-highlight">I'm a flexbox container!</div>
+
+         <button type="submit" class="btn btn-success">Submit</button>
+
+
+    </form>
+
+</div>
+
+{% endblock %}
