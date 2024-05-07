@@ -1,58 +1,66 @@
 {% extends "themes1.html" %}
 {% block content %}
 {% load static %}
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+ <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="{% static 'loginstyle.css' %}">
-<link rel="stylesheet" href="{% static 'customerstyle.css' %}">
-<style>
-        #card-authors{
+<link rel="stylesheet" href="{% static 'bookstyle.css' %}">
 
-        display:inline-block
-
-        }
-
-</style>
 <body>
 
-<div class="conatiner" style="margin-top:40px;margin-left:70px;">
+<div class="container mt-4" >
+    <div class="card" style="margin-top:60px;">
+    <div class="container-fluid" style="width: 100%; height:;margin-bottom:50px;w3-border">
+
+        <div class="container-fluid" style="padding-top:40px;width:100%;height:x;" >
+                <ul class="unstyled">
+                 <li class="list-inline-item">
+                     <div class="col-md-4" style="">
+                                 <img src="{{ author.image.url }}" class="img-fluid rounded-start" alt="..." style="width:400px;">
+                     </div>
+                 </li>
+                    <li class="list-inline-item">
+                           <h3 class="card-title">  {{ author.author }}</h3>
+                            <p>{{ author.content }}</p>
+
+                     </li>
+                </ul>
+        </div>
+                      <h4 style="text-align:center;">Books: {{ count }} </h4>
+        <div class="container-fluid" style="padding-top:40px;width:100%;height:x;">
+
+                        <ul class="card-data">
+                            {% for i in book %}
+                            <div class="card" style="width: 10rem;padding-top:20px;display:inline-block flex" >
+                                <center><a href="{% url 'shopping' i.id %}" ><img src="{{ i.image.url }}" class="card-img-top" alt="..." style="width:5rem"></a></center>
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ i.book }}</h5>
+                                    <p class="card-text">{{ i.author1 }}</p>
+                                    <p class="card-text"> <span>&#8377;</span>{{ i.price }}</p>
+                                </div>
+                            </div>
+                            {% endfor %}
+
+    <br>
+
+                        </ul>
+        </div>
+
+    </div>
+<style>
+   .card-data
+    {
+    display:flex;
+    gap:10px;
+    grid-template-columns: repeat(auto-fill, minmax(200px,1fr)
+    flex-wrap: wrap;
+    }
+</style>
 
 
 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- {% for i in data %}
-        <div class="row row-cols-1 row-cols-md-2 g-4" >
-         <div class="col">
-               <div class="card w-100" style="card-border-color:rgba($black, .125);">
-                    <div class="card-body" id="card-authors">
-                        <img src="{{ i.image.url }}" class="img-fluid rounded-start">
-                        <p class="card-text" style="">{{ i.author }}</p>
-                         <p class="card-text" style="width:50px;height:50%">{{ i.content }}</p>
-                        <a href="#" class="btn btn-primary">Read More</a>
-                    </div>
-                </div>
-            </div>
-
-  </div>
-</div>
-        {% endfor %}
     </div>
 
-
-</div>
-
-{% endblock %}
 </body>
+{% endblock %}

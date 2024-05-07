@@ -8,9 +8,55 @@
 <link rel="stylesheet" href="{% static 'customerstyle.css' %}">
 <link rel="stylesheet" href="{% static 'bookstyle.css' %}">
 
-<script language="javascript" type="text/javascript">
 
-    </script>
+<body>
+<div class="container mt-4" >
+    <div class="text-center" style="margin-top:40px;"><span>Your Order</span></div>
+    <div class="conatiner-card" id="buy-card" style="width: 100%; height:;margin-bottom:50px;w3-border">
+
+        <div class="container-fluid">
+           <ol  class="list-unstyled" style="padding-top:20px;w3-border">
+                    {% for i in  cart_items %}
+
+                    <li class="list-inline-item">
+                        <span> <img src="{{ i.book.image.url }}" class="card-img-top" alt="..." style="width:120px;"></span>
+                    </li>
+                     <li class="list-inline-item">
+                            <p><span> {{ i.book.book }}</span></p>
+                                            <p>{{ i.author }}</p>
+                                            <p><span>Price: <span>&#8377;</span><span>{{ i.price }}</span></p>
+                                            <p>Qunatity: {{ i.qty }}</p>
+                     </li>
+
+                    <div class="col-md-4">
+                                                <p class="text-right">Total Price: &#8377;{{ i.total_amount }}</p>
+                                                <a href="{% url 'wished_lists' i.book.id %}" class="btn btn-success">Add To Wishlist</a>
+                                                <a href="{% url 'remove_from_cart' i.id %}" class="btn btn-warning">Remove</a>
+                    </div>
+
+                 <P>____________________________________________________________</P>
+
+                     {% endfor %}
+
+               </ol>
+                     <br>
+                     <br>
+        </div>
+        <div class="proceed-to-buy" style="height:20%;width:800px;">
+                                <p class="subtotal" style="text-align:right;padding-right:20px;">Subtotal: &#8377;{{ total_amount }}</p>
+                               <form action="{% url 'add_to_order' %}" method="post">
+                                  {% csrf_token %}
+                                   <center> <button type="submit" class="btn btn-success" style="width:200px;">Proceed to Buy</button></center>
+                              </form>
+
+    </div>
+    <br>
+    </div>
+
+
+    </div>
+
+
 <style>
 #buy-card{
 <!--    border-style: ridge;-->
@@ -32,52 +78,6 @@ padding-bottom:40px;
 
     }
 </style>
-
-</script>
-<body>
-<div class="container mt-4" >
-    <div class="text-center" style="margin-top:40px;"><span>Your Order</span></div>
-    <div class="conatiner-card" id="buy-card" style="width: 100%; height: 750px;margin-bottom:50px;w3-border">
-
-        <div class="container-fluid">
-
-                    {% for i in cart_items %}
-            <ol  class="list-unstyled" style="padding-top:20px;w3-border">
-                    <li class="list-inline-item">
-                        <span> <img src="{{ i.book.image.url }}" class="card-img-top" alt="..." style="width:120px;"></span>
-                    </li>
-                     <li class="list-inline-item">
-                            <p><span> {{ i.book.book }}</span></p>
-                                            <p>{{ i.author }}</p>
-                                            <p><span>Price: <span>&#8377;</span><span>{{ i.price }}</span></p>
-                                            <p>Qunatity: {{ i.qty }}</p>
-                     </li>
-
-                    <div class="col-md-4">
-                                                <p class="text-right">Total Price: &#8377;{{ i.total_amount }}</p>
-                                                <a href="{% url 'wished_lists' i.book.id %}" class="btn btn-success">Add To Wishlist</a>
-                                                <a href="{% url 'remove_from_cart' i.id %}" class="btn btn-warning">Remove</a>
-                    </div>
-
-                     {% endfor %}
-
-               </ol>
-                     <br>
-                     <br>
-        </div>
-        <div class="proceed-to-buy" style="height:20%;width:800px;">
-                                <p class="subtotal">Subtotal: &#8377;{{ total_amount }}</p>
-                               <form action="{% url 'add_to_order' %}" method="post">
-                                  {% csrf_token %}
-                                 <button type="submit" class="btn btn-success">Proceed to Buy</button>
-                              </form>
-
-    </div>
-    <br>
-    </div>
-
-
-    </div>
 
 {% endblock %}
 </body>

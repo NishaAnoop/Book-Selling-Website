@@ -1,18 +1,20 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, update_session_auth_hash
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import render, redirect
 from django.shortcuts import redirect, HttpResponse
 from django.http import HttpResponse
 from django.http import JsonResponse, request
+from django.db.models import OuterRef, Subquery
 from BooksApp.forms import UserRegister, CustomerRegister, AddBooks, CustomerAddress, FeaturedAuthor
 from BooksApp.models import Customers, Books_data, User, customer_address, featured_authors, Cart_books, wishlist
 
 
 # Create your views here.
 def home(request):
-    data = Books_data.objects.all()
-    return render(request, 'index.html', {'data': data})
+    book = Books_data.objects.all()
+    return render(request, 'index.html', {'book': book})
 
 
 def loginpage(request):
@@ -52,6 +54,8 @@ def register(request):
 def logout(request):
     request.session.clear()
     return redirect('home')
+
+
 
 
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -212,8 +216,24 @@ def viewfeatured(request):
 
 
 def customer_authors(request):
+    newcontent = ''
     data = featured_authors.objects.all()
-    return render(request, 'authors.html', {'data': data})
+    for i in data:
+        summary = i.content
+        s1 = slice(200)
+        newcontent = summary[s1]
+        print(newcontent)
+    return render(request, 'featured.html', {'data': data, 'newcontent': newcontent})
+
+
+def authors(request, id):
+    author = featured_authors.objects.get(id=id)
+    bk_author=author.author
+    book=Books_data.objects.filter(author1=bk_author)
+    count=len(book)
+    print(count,"count***********")
+    #book = Books_data.objects.annotate(author1=Subquery(featured_authors.author))
+    return render(request, 'authors.html', {'author': author, 'book': book,'count':count})
 
 
 def bookstheme(request):
@@ -324,6 +344,7 @@ def remove_from_cart(request, id):
     return redirect('gotocart')
 
 
+@login_required(login_url='loginpage')
 def buynow(request):
     #
     # s=request.session()
@@ -335,12 +356,13 @@ def buynow(request):
         address = customer_address.objects.filter(customer=Customers.objects.get(user=request.user)).first()
 
     else:
+
         messages.info(request, 'Authentication Required')
 
     return render(request, 'buynow.html', {'order_items': order_items, 'address': address})
 
 
-def buy_direct(request):
+def buydirect(request):
     # data=Books_data.objects.get(id=id)
     if request.method == 'POST':
         if request.user.is_authenticated:
@@ -360,8 +382,10 @@ def buy_direct(request):
             order.total = quantity * book_price
             print(order.total, "total*********")
             order.save()
-        response = JsonResponse({'book title:': order.book.book})
-        return redirect('buynow')
+            response = JsonResponse({'book title:': order.book.book})
+            address = customer_address.objects.filter(customer=Customers.objects.get(user=request.user)).first()
+            order_items = Order_items.objects.filter(user=request.user)
+        return render(request, 'buynow.html', {'order_items': order_items, 'address': address})
 
 
 from django.shortcuts import redirect, HttpResponse
@@ -409,15 +433,11 @@ def complete_order(request):
     # Remove items from the user's order
     order_items.delete()
     messages.success(request, 'Your order has been completed successfully.')
-    return redirect('fiction_books')
+    return redirect('action')
 
 
 def checkout(request):
     return render(request, 'checkout.html')
-
-
-def cancellation(request):
-    return render(request, 'buynow.html')
 
 
 # -----------------------------------------------------------------
@@ -430,3 +450,6 @@ def search_view(request):
         "query": query
     }
     return render(request, 'search_view.html', context)
+
+def action(request):
+    return render(request, 'success.html')

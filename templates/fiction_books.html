@@ -3,22 +3,15 @@
 {% load static %}
 
 <link rel="stylesheet" href="{% static 'loginstyle.css' %}">
-<link rel="stylesheet" href="{% static 'customerstyle.css' %}">
+<!-- Font Awesome Icon Library -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <link rel="stylesheet" href="{% static 'bookstyle.css' %}">
 <style>
-
-   .card-data
-    {
-    display:flex;
-    gap:10px;
-    grid-template-columns: repeat(auto-fill, minmax(200px,1fr)
-    flex-wrap: wrap;
-    }
-
+.checked {
+  color: orange;
+}
 </style>
-
-
-
 <body>
 <div class="conatiner" style="margin-top:40px;margin-left:70px; ">
    <center> <h3> Fiction Books</h3></center>
@@ -30,7 +23,13 @@
                  <div class="card-body">
                   <h5 class="card-title">{{ i.book }}</h5>
                   <p class="card-text">{{ i.author1 }}</p>
-                    <p class="card-text">{{ i.price }}</p>
+                    <p class="card-text"><span>&#8377;</span>{{ i.price }}</p>
+                     <span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star"></span>
+
                             </div>
        </div>
       {% endfor %}
@@ -39,7 +38,16 @@
 
 </ul>
 </div>
+<style>
+   .card-data
+    {
+    display:flex;
+    gap:10px;
+    grid-template-columns: repeat(auto-fill, minmax(200px,1fr)
+    flex-wrap: wrap;
+    }
 
+
+</style>
 </body>
-
 {% endblock %}

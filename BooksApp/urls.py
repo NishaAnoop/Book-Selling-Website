@@ -37,6 +37,7 @@ urlpatterns = [
     path('featuredadmin', views.featuredadmin, name='featuredadmin'),
     path('viewfeatured', views.viewfeatured, name='viewfeatured'),
     path('customer_authors', views.customer_authors, name='customer_authors'),
+    path('authors/<int:id>', views.authors, name='authors'),
     path('fiction_books', views.fiction_books, name='fiction_books'),
     path('non_fiction', views.non_fiction, name='non_fiction'),
     path('business', views.business, name='business'),
@@ -54,14 +55,14 @@ urlpatterns = [
     # Buy Order
     path('checkout', views.checkout, name='checkout'),
     path('buynow', views.buynow, name='buynow'),
-    path('buy_direct', views.buy_direct, name='buy_direct'),
+    path('buydirect', views.buydirect, name='buydirect'),
     path('add_to_order', views.add_to_order, name='add_to_order'),
     path('view_order', views.view_order, name='view_order'),
     path('OrderAdmin', views.OrderAdmin, name='OrderAdmin'),
     path('complete_order', views.complete_order, name='complete_order'),
 
     path('checkout', views.checkout, name='checkout'),
-    path('cancellation', views.cancellation, name='cancellation'),
+    path('action', views.action, name='action'),
 
     path('search_view', views.search_view, name='search_view'),
 

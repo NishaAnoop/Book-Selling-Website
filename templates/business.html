@@ -4,29 +4,53 @@
 
 <link rel="stylesheet" href="{% static 'loginstyle.css' %}">
 <link rel="stylesheet" href="{% static 'customerstyle.css' %}">
-<div class="conatiner" style="margin-top:40px;margin-left:70px; ">
-   <center> <h3> Business Books</h3></center>
+<link rel="stylesheet" href="{% static 'bookstyle.css' %}">
+<!-- Font Awesome Icon Library -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+.checked {
+  color: orange;
+}
+</style>
 
+<body>
+<div class="container" style="margin-top:40px;margin-left:70px; ">
+   <center> <h3> Fiction Books</h3></center>
 
+<ul class="card-data">
  {% for i in data %}
-       <div class="card" style="width: 12rem;padding-top:20px;" >
+       <div class="card" style="width: 10rem;padding-top:20px;display:inline-block flex" >
+           <center><a href="{% url 'shopping' i.id %}" ><img src="{{ i.image.url }}" class="card-img-top" alt="..." style="width:5rem"></a></center>
+                 <div class="card-body">
+                  <h5 class="card-title">{{ i.book }}</h5>
+                  <p class="card-text">{{ i.author1 }}</p>
+                    <p class="card-text"><span>&#8377;</span>{{ i.price }}</p>
+                     <span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star"></span>
+                            </div>
+       </div>
+      {% endfor %}
 
-           <center><a href="{% url 'shopping' i.id %}" ><img src="{{ i.image.url }}" class="card-img-top" alt="..." style="width:8rem"></a></center>
-  <div class="card-body">
-    <h5 class="card-title">{{ i.book }}</h5>
-    <p class="card-text">{{ i.author1 }}</p>
-       <p class="card-text">{{ i.price }}</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
-
-</div>
     <br>
-<!--    <div class="row row-cols-4 row-cols-md-2"  >-->
-        {% endfor %}
-    </div>
-    </div>
 
-
+</ul>
 </div>
+<style>
+
+   .card-data
+    {
+    display:flex;
+    gap:10px;
+    grid-template-columns: repeat(auto-fill, minmax(200px,1fr)
+    flex-wrap: wrap;
+    }
+
+</style>
 
 {% endblock %}
+</body>
+
+
